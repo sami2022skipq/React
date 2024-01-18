@@ -1,6 +1,9 @@
 import { useState } from "react";
 
+// Example of state management UseStete
+
 import "./App.css";
+
 
 function App() {
   const [count, setCount] = useState(10);
@@ -12,11 +15,11 @@ function App() {
 
   return (
     <>
-      <h1>My name is Sami</h1>
+      <h1>My name is ABC</h1>
       <h2>The value of the counter is {count}</h2>
       <button onClick={addValue}>Add Value</button>
       <button onClick={decreaseValue}>Decrease Value</button>
-      <p>Footer {count}</p>
+      <p>Footer{count}</p>
       <button onClick={() => setCount(0)}>Reset</button>
     </>
   );
