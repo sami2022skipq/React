@@ -4,6 +4,15 @@
   padding: 2rem;
   text-align: center;
 }
+h1{
+background-color: rgb(191, 245, 191);
+text-align: right;
+font-style: oblique;
+}
+h2{
+  background-color: aqua;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 .logo {
   height: 6em;
