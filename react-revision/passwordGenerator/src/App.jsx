@@ -1,12 +1,14 @@
-import './App.css'
+import "./App.css";
+import Generator from "./Generator";
+import Header from "./Header";
 
 function App() {
-
   return (
     <>
-      <h1 style={{backgroundColor:'green'}}>Code Generator</h1>
+      <Header/>
+      <Generator/>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
