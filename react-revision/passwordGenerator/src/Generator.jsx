@@ -1,10 +1,29 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 const Generator = () => {
   const [length, setLength] = useState(12);
   const [isCharAllowed, setIsCharAllowed] = useState(false);
   const [numberAllowed, setNumberAllowed] = useState(true);
   const [password, setPassword] = useState("");
+  useEffect(() => {
+    generatePassword();
+  }, [isCharAllowed, numberAllowed, length]);
+
+  const generatePassword = useCallback(() => {
+    let pass = "";
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    if (isCharAllowed) str += "!@#$%^&*";
+    if (numberAllowed) str += "1234567890";
+    for (let i = 1; i < length; i++) {
+      const char = Math.floor(Math.random() * str.length + 1);
+      pass += str.charAt(char);
+    }
+    setPassword(pass);
+  }, [length, isCharAllowed, numberAllowed]);
+  const copyPassword =()=>{
+    window.navigator.clipboard.writeText(password)
+  }
+
   return (
     <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
       <h1 className="text-3xl font-bold mb-2 text-center">
@@ -18,7 +37,7 @@ const Generator = () => {
           placeholder="Password"
           readOnly
         ></input>
-        <button className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0">
+        <button className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0" onClick={copyPassword}>
           Copy
         </button>
       </div>
