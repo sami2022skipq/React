@@ -1,14 +1,17 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Component, useCallback, useEffect, useRef, useState } from "react";
 
 const Generator = () => {
   const [length, setLength] = useState(12);
   const [isCharAllowed, setIsCharAllowed] = useState(false);
   const [numberAllowed, setNumberAllowed] = useState(true);
   const [password, setPassword] = useState("");
+  const passwordRef = useRef(null);
+
+  //  Executing code at start and chnage in dependency array
   useEffect(() => {
     generatePassword();
   }, [isCharAllowed, numberAllowed, length]);
-
+  // using callback for memoization
   const generatePassword = useCallback(() => {
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -20,9 +23,10 @@ const Generator = () => {
     }
     setPassword(pass);
   }, [length, isCharAllowed, numberAllowed]);
-  const copyPassword =()=>{
-    window.navigator.clipboard.writeText(password)
-  }
+  const copyPassword = () => {
+    window.navigator.clipboard.writeText(password);
+    passwordRef.current?.select()
+  };
 
   return (
     <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
@@ -36,8 +40,12 @@ const Generator = () => {
           className="outline-none w-full py-1 px-3"
           placeholder="Password"
           readOnly
+          ref={passwordRef}
         ></input>
-        <button className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0" onClick={copyPassword}>
+        <button
+          className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0"
+          onClick={copyPassword}
+        >
           Copy
         </button>
       </div>
@@ -53,6 +61,7 @@ const Generator = () => {
           ></input>
           <label htmlFor="length">Length: {length}</label>
         </div>
+        {/* // Character Check Box */}
         <div className="flex items-center gap-x-3">
           <input
             type="checkbox"
@@ -61,6 +70,7 @@ const Generator = () => {
           ></input>
           <label htmlFor="char">Char</label>
         </div>
+        {/* // Number Check Box */}
         <div className="flex items-center gap-x-3">
           <input
             type="checkbox"
