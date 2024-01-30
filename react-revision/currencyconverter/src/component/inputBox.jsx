@@ -21,10 +21,10 @@ export const InputBox = ({
           {lable}
         </lable>
         <input
+          className=" outline-none bg-transparent w-full py-1.5"
           id={id}
           type="number"
-          className="outline-none bg-transparent w-full py-1.5"
-          placeholder={amount}
+          // placeholder="test"
           // disabled={amountDisabled}
           value={amount}
           onChange={(e) =>
@@ -37,7 +37,6 @@ export const InputBox = ({
         <select
           className="rounded-lg p-1 bg-gray-100 cursor-pointer outline-none"
           value={selectedCurrency}
-          //   disabled={currencyDisabled}
           onChange={(e) => {
             onCurrencyChange && onCurrencyChange(e.target.value);
           }}
