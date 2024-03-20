@@ -13,21 +13,19 @@ export const todoSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
-    addToDo: (state, actions) => {
+    addTodo: (state, action) => {
       const todo = {
         id: nanoid(),
-        text: actions.paylod.text,
+        text: action.payload,
       };
       state.todos.push(todo);
     },
-    removeToDo: (state, actions) => {
-      state.todos = state.todos.filter((todo) => {
-        todo.id !== actions.paylod;
-      });
+    removeTodo: (state, action) => {
+      state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
   },
 });
 
-export const { addToDo, removeToDo } = todoSlice.actions;
+export const { addTodo, removeTodo } = todoSlice.actions;
 
 export default todoSlice.reducer;
